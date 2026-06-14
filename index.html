@@ -1,1 +1,467 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Prestige Estates | Luxury Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:#1a1a2e;background:#fff;line-height:1.6}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block;border-radius:4px}
+ul{list-style:none}
+.container{max-width:1280px;margin:0 auto;padding:0 24px}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:700;line-height:1.2}
+h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:8px}
+.section-subtitle{font-size:.95rem;color:#8b7355;text-transform:uppercase;letter-spacing:3px;font-weight:500;margin-bottom:16px}
+.section-header{text-align:center;margin-bottom:60px}
+.section-header p{color:#6b7280;max-width:580px;margin:12px auto 0;font-size:1.05rem}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;font-weight:600;font-size:.95rem;border:none;cursor:pointer;transition:all .3s;border-radius:6px;font-family:'Inter',sans-serif}
+.btn-primary{background:#1a1a2e;color:#fff}
+.btn-primary:hover{background:#2d2d4a}
+.btn-gold{background:#c9a96e;color:#fff}
+.btn-gold:hover{background:#b8944e}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,0,0,.06)}
+.navbar .container{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{font-size:1.6rem;font-weight:700}.logo span{color:#c9a96e}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:.9rem;font-weight:500;color:#4b5563;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:#c9a96e;transition:width .3s}
+.nav-links a:hover{color:#1a1a2e}.nav-links a:hover::after{width:100%}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.hamburger span{width:26px;height:2px;background:#1a1a2e}
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;padding-top:72px;background:linear-gradient(135deg,#0f0f1a,#1a1a2e 50%,#16213e);overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:url('https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1920')center/cover no-repeat;opacity:.15}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:60px;position:relative;z-index:1;padding:80px 0}
+.hero-content h1{font-size:clamp(2.5rem,5vw,4rem);color:#fff;margin-bottom:20px}
+.hero-content h1 em{color:#c9a96e;font-style:normal}
+.hero-content p{color:rgba(255,255,255,.7);font-size:1.1rem;max-width:520px;margin-bottom:36px}
+.hero-badges{display:flex;gap:40px;margin-top:40px}
+.hero-badges div{text-align:center}.hero-badges strong{display:block;font-size:1.8rem;color:#c9a96e;font-weight:800}
+.hero-badges span{font-size:.8rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px}
+.hero-gallery{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hero-gallery img{border-radius:8px;width:100%;height:200px;object-fit:cover}
+.hero-gallery img:first-child{grid-column:1/-1;height:260px}
+.properties{padding:100px 0;background:#fafafa}
+.search-bar{display:flex;gap:12px;max-width:640px;margin:0 auto 16px;position:relative}
+.search-bar input{flex:1;padding:16px 20px 16px 52px;border:1px solid #e5e7eb;border-radius:8px;font-size:1rem;font-family:'Inter',sans-serif;background:#fff}
+.search-bar input:focus{outline:none;border-color:#c9a96e;box-shadow:0 0 0 3px rgba(201,169,110,.15)}
+.search-bar .search-icon{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:#9ca3af}
+.search-bar .clear-btn{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:#9ca3af;cursor:pointer;display:none;padding:4px;font-size:1.2rem}
+.search-bar .clear-btn.visible{display:block}
+.country-tabs{display:flex;justify-content:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.country-tabs button{padding:10px 28px;border:2px solid #e5e7eb;background:#fff;border-radius:30px;font-size:.9rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:8px}
+.country-tabs button.active{background:#1a1a2e;color:#fff;border-color:#1a1a2e}
+.search-results-info{text-align:center;font-size:.9rem;color:#6b7280;margin-bottom:24px;min-height:24px}
+.property-filters{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:48px}
+.property-filters button{padding:10px 24px;border:1px solid #e5e7eb;background:#fff;border-radius:30px;font-size:.85rem;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif}
+.property-filters button.active,.property-filters button:hover{background:#1a1a2e;color:#fff;border-color:#1a1a2e}
+.property-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+.property-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06);cursor:pointer}
+.property-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.12)}
+.property-card .img-wrap{position:relative;overflow:hidden}
+.property-card .main-img{width:100%;height:240px;object-fit:cover;transition:transform .6s}
+.property-card:hover .main-img{transform:scale(1.08)}
+.country-badge{position:absolute;top:12px;left:12px;padding:5px 12px;border-radius:20px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;z-index:2}
+.country-badge.us{background:#dbeafe;color:#1e40af}.country-badge.ca{background:#fef3c7;color:#92400e}
+.thumb-strip{display:flex;gap:3px;padding:3px;background:#f9f9f9;border-bottom:1px solid #f0f0f0}
+.thumb-strip img{width:calc(33.333% - 2px);height:50px;object-fit:cover;border-radius:3px;opacity:.85}
+.property-info{padding:20px}
+.property-info .tag{display:inline-block;padding:4px 12px;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;border-radius:4px;margin-bottom:10px}
+.tag-sale{background:#dbeafe;color:#1e40af}.tag-new{background:#d1fae5;color:#065f46}
+.property-info h3{font-size:1.1rem;margin-bottom:6px}
+.property-info .loc{font-size:.85rem;color:#9ca3af;margin-bottom:12px}
+.property-info .loc i{margin-right:6px}
+.property-info .price{font-size:1.3rem;font-weight:700;color:#1a1a2e}
+.property-info .price .cur{font-size:.75rem;font-weight:500;color:#6b7280;margin-left:6px}
+.property-info .details{display:flex;gap:16px;font-size:.8rem;color:#6b7280;margin-top:12px;padding-top:12px;border-top:1px solid #f3f4f6}
+.property-info .details i{margin-right:4px}
+.no-results{text-align:center;padding:60px 20px;grid-column:1/-1;color:#6b7280}
+.no-results i{font-size:3rem;color:#d1d5db;margin-bottom:16px}
+.modal-overlay{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.85);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:40px}
+.modal-overlay.open{display:flex}
+.modal-content{background:#fff;border-radius:16px;max-width:960px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:modalIn .3s}
+@keyframes modalIn{from{opacity:0;transform:scale(.95) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-close{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;border:none;font-size:1.2rem;cursor:pointer;z-index:10}
+.modal-gallery{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:20px 24px}
+.modal-gallery img{width:100%;height:240px;object-fit:cover;border-radius:8px}
+.modal-gallery img:first-child{grid-column:1/-1;height:360px}
+.modal-header{padding:28px 24px 0}
+.modal-header h2{font-size:1.6rem;margin-bottom:4px}
+.modal-header .loc{color:#6b7280;font-size:.95rem}
+.modal-header .mp{font-size:1.8rem;font-weight:700;color:#1a1a2e;margin-top:8px}
+.modal-header .mp .cur{font-size:.85rem;font-weight:500;color:#6b7280}
+.modal-dets{display:flex;gap:24px;padding:12px 24px;font-size:.9rem;color:#4b5563;flex-wrap:wrap}
+.modal-dets i{margin-right:6px;color:#c9a96e}
+.modal-body{padding:0 24px 24px}
+.modal-body p{color:#6b7280;font-size:.9rem;line-height:1.7}
+.about{padding:100px 0}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-image img{border-radius:12px;width:100%;height:480px;object-fit:cover}
+.about-image{position:relative}
+.about-image::before{content:'';position:absolute;top:-16px;left:-16px;width:100%;height:100%;border:3px solid #c9a96e;border-radius:12px;z-index:-1}
+.about-text p{color:#6b7280;margin-bottom:20px;font-size:1.05rem}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px}
+.about-stats div{text-align:center;padding:20px;background:#fafafa;border-radius:8px}
+.about-stats strong{display:block;font-size:2rem;color:#c9a96e}
+.about-stats span{font-size:.8rem;color:#6b7280}
+.testimonials{padding:100px 0;background:#fafafa}
+.testimonial-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:30px}
+.testimonial-card{background:#fff;padding:36px;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.testimonial-card .stars{color:#f59e0b;margin-bottom:16px}
+.testimonial-card blockquote{font-size:1rem;color:#4b5563;line-height:1.7;margin-bottom:20px;font-style:italic}
+.testimonial-card .author{display:flex;align-items:center;gap:14px}
+.testimonial-card .author img{width:48px;height:48px;border-radius:50%;object-fit:cover}
+.testimonial-card .author h4{font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600}
+.testimonial-card .author span{font-size:.8rem;color:#9ca3af}
+.contact{padding:100px 0}.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px}
+.contact-details{display:flex;flex-direction:column;gap:24px}
+.contact-details .item{display:flex;gap:16px}
+.contact-details .item i{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:#f3f4f6;border-radius:8px;color:#c9a96e;flex-shrink:0}
+.contact-details .item h4{font-size:.95rem;margin-bottom:4px}
+.contact-details .item p{color:#6b7280;font-size:.9rem}
+.contact-form{display:flex;flex-direction:column;gap:16px}
+.contact-form input,.contact-form textarea,.contact-form select{padding:14px 18px;border:1px solid #e5e7eb;border-radius:8px;font-size:.95rem;font-family:'Inter',sans-serif;background:#fff}
+.contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus{outline:none;border-color:#c9a96e;box-shadow:0 0 0 3px rgba(201,169,110,.15)}
+.contact-form textarea{min-height:120px;resize:vertical}
+.contact-form .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.map-section{padding:0 0 100px}
+.map-wrapper iframe{width:100%;height:420px;display:block;border:none;border-radius:12px}
+.footer{background:#1a1a2e;color:rgba(255,255,255,.7);padding:60px 0 30px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-brand h3{color:#fff;margin-bottom:12px;font-size:1.3rem}
+.footer-brand h3 span{color:#c9a96e}.footer-brand p{font-size:.9rem;max-width:320px}
+.footer h4{font-family:'Inter',sans-serif;color:#fff;font-size:.9rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
+.footer ul li{margin-bottom:10px}
+.footer ul li a{font-size:.9rem}.footer ul li a:hover{color:#c9a96e}
+.footer-social{display:flex;gap:12px;margin-top:20px}
+.footer-social a{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid rgba(255,255,255,.15)}
+.footer-social a:hover{background:#c9a96e;border-color:#c9a96e;color:#fff}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;justify-content:space-between;font-size:.8rem;flex-wrap:wrap;gap:8px}
+.scroll-top{position:fixed;bottom:30px;right:30px;width:48px;height:48px;background:#c9a96e;color:#fff;border:none;border-radius:50%;cursor:pointer;font-size:1.2rem;display:none;align-items:center;justify-content:center;z-index:999}
+.scroll-top.visible{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:992px){
+  .hero-grid{grid-template-columns:1fr;text-align:center}
+  .hero-content p{margin:0 auto 36px}
+  .hero-badges{justify-content:center}
+  .hero-gallery{max-width:500px;margin:0 auto}
+  .about-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .modal-gallery{grid-template-columns:1fr}
+  .modal-gallery img:first-child{height:260px}
+  .modal-gallery img{height:200px}
+}
+@media(max-width:768px){
+  .nav-links{position:fixed;top:72px;left:0;right:0;background:#fff;flex-direction:column;padding:24px;gap:20px;border-bottom:1px solid #e5e7eb;display:none}
+  .nav-links.open{display:flex}
+  .hamburger{display:flex}
+  .hero-badges{flex-wrap:wrap;gap:24px}
+  .testimonial-grid{grid-template-columns:1fr}
+  .contact-form .row{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .property-grid{grid-template-columns:1fr}
+  .modal-overlay{padding:16px}
+  .modal-gallery{padding:16px;grid-template-columns:1fr}
+  .modal-header{padding:20px 16px 0}
+  .modal-dets{padding:12px 16px}
+  .modal-body{padding:0 16px 16px}
+}
+</style>
+</head>
+<body>
+  <nav class="navbar">
+  <div class="container">
+    <a href="#" class="logo">Prestige<span>.</span>Estates</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#properties">Properties</a>
+      <a href="#about">About</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn btn-gold" style="padding:10px 24px;font-size:.85rem"><i class="fas fa-phone"></i> (212) 555-0198</a>
+    </div>
+    <div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
 
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <p class="section-subtitle" style="text-align:left;color:#c9a96e">Since 2004</p>
+        <h1>Where <em>Luxury</em> Meets <em>Location</em></h1>
+        <p>Curating the finest properties across the United States and Canada. From Manhattan penthouses to Vancouver waterfronts — we turn addresses into legacies.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap">
+          <a href="#properties" class="btn btn-gold"><i class="fas fa-search"></i> Browse Properties</a>
+          <a href="#contact" class="btn btn-primary">Schedule a Tour</a>
+        </div>
+        <div class="hero-badges">
+          <div><strong>$4.2B+</strong><span>Total Sales</span></div>
+          <div><strong>2,400+</strong><span>Properties Sold</span></div>
+          <div><strong>155</strong><span>Active Listings</span></div>
+        </div>
+      </div>
+      <div class="hero-gallery">
+        <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
+        <img src="https://images.pexels.com/photos/2079249/pexels-photo-2079249.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" loading="lazy">
+        <img src="https://images.pexels.com/photos/2587054/pexels-photo-2587054.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" loading="lazy">
+        <img src="https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" loading="lazy">
+        <img src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="properties" id="properties">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-subtitle">Our Portfolio</p>
+      <h2>Featured Properties</h2>
+      <p>155 unique for-sale properties across the US and Canada. Click any listing to view the gallery.</p>
+    </div>
+    <div class="search-bar">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" id="searchInput" placeholder="Search by title, city, location, or price..." oninput="doSearch()">
+      <button class="clear-btn" id="clearBtn" onclick="clearSearch()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="country-tabs">
+      <button class="active" onclick="filterCountry('all',this)"><i class="fas fa-globe-americas"></i> All Countries</button>
+      <button onclick="filterCountry('us',this)"><i class="fas fa-flag-usa"></i> United States (99)</button>
+      <button onclick="filterCountry('ca',this)"><i class="fas fa-maple-leaf"></i> Canada (56)</button>
+    </div>
+    <div class="search-results-info" id="resultsInfo"></div>
+    <div class="property-filters">
+      <button class="active" onclick="filterTag('all',this)">All</button>
+      <button onclick="filterTag('sale',this)">For Sale</button>
+      <button onclick="filterTag('new',this)">New Listings</button>
+    </div>
+    <div class="property-grid" id="propertyGrid"></div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image"><img src="https://images.pexels.com/photos/3183183/pexels-photo-3183183.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy"></div>
+      <div class="about-text">
+        <p class="section-subtitle">About Us</p>
+        <h2>Two Decades of Real Estate Excellence</h2>
+        <p>Founded in 2004 by siblings Alexander and Victoria Crane, Prestige Estates began as a boutique Manhattan brokerage. Today we serve clients across the United States and Canada with 50+ agents.</p>
+        <p>We don't just sell homes — we curate lifestyles. Every listing undergoes rigorous vetting for location, architectural integrity, and investment potential.</p>
+        <div class="about-stats">
+          <div><strong>21</strong><span>Years</span></div>
+          <div><strong>50+</strong><span>Agents</span></div>
+          <div><strong>80+</strong><span>Cities</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-subtitle">Testimonials</p>
+      <h2>What Our Clients Say</h2>
+    </div>
+    <div class="testimonial-grid" id="testimonialGrid"></div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-subtitle">Get in Touch</p>
+      <h2>Let's Find Your Next Address</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-details">
+        <div class="item"><i class="fas fa-map-marker-alt"></i><div><h4>Headquarters</h4><p>425 Park Avenue, Suite 1800<br>New York, NY 10022</p></div></div>
+        <div class="item"><i class="fas fa-map-marker-alt"></i><div><h4>Canada Office</h4><p>1 York Street, Suite 1400<br>Toronto, ON M5J 0B6</p></div></div>
+        <div class="item"><i class="fas fa-phone-alt"></i><div><h4>Phone</h4><p>US: (212) 555-0198<br>Canada: (416) 555-0147</p></div></div>
+        <div class="item"><i class="fas fa-envelope"></i><div><h4>Email</h4><p>hello@prestige-estates.com</p></div></div>
+      </div>
+      <form class="contact-form" onsubmit="event.preventDefault();alert('Thank you! We will reach out within 24 hours.');this.reset()">
+        <div class="row"><input type="text" placeholder="Full Name" required><input type="email" placeholder="Email" required></div>
+        <div class="row">
+          <input type="tel" placeholder="Phone">
+          <select><option>Buying</option><option>Selling</option><option>Investment</option></select>
+        </div>
+        <textarea placeholder="Tell us what you're looking for..." required></textarea>
+        <button type="submit" class="btn btn-gold" style="align-self:flex-start"><i class="fas fa-paper-plane"></i> Send</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="map-section">
+  <div class="container">
+    <div class="map-wrapper">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.1422937950147!2d-73.973244!3d40.754932!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c258fb5a1c6b5b%3A0x5f7b2c1c8a2f8c1!2s425%20Park%20Ave%2C%20New%20York%2C%20NY%2010022!5e0!3m2!1sen!2sus!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Office"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Prestige<span>.</span>Estates</h3>
+        <p>Curating the world's finest properties since 2004.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div><h4>Quick Links</h4><ul><li><a href="#properties">Properties</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div><h4>Markets</h4><ul><li><a href="#">United States</a></li><li><a href="#">Canada</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Prestige Estates. All rights reserved.</span>
+      <span>Equal Housing Opportunity.</span>
+    </div>
+  </div>
+</footer>
+
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up"></i></button>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+    <div class="modal-header" id="modalHeader"></div>
+    <div class="modal-dets" id="modalDets"></div>
+    <div class="modal-gallery" id="modalGallery"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+  <script>
+// ====== TOGGLE MENU ======
+document.querySelectorAll('.nav-links a').forEach(l=>l.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+
+// ====== IMAGE URL HELPER ======
+function img(id,w){return 'https://images.pexels.com/photos/'+id+'/pexels-photo-'+id+'.jpeg?auto=compress&cs=tinysrgb&w='+(w||600)}
+
+// ====== 155 UNIQUE EXTERIOR PHOTO IDs ======
+const EXTS=[106399,280221,323780,209296,276528,164522,258154,439391,1080721,1115804,1029599,1396122,210617,189296,1732414,1571460,2587054,2079249,271816,457882,1475938,3288102,3769138,3861958,3861960,3861972,3861976,4666851,4666852,4666853,4666854,4666855,4666856,4666857,4666858,4666859,4666860,4666861,4666862,4666863,4666864,4666865,4666866,4666867,4666868,4666869,4666870,4666871,4666872,4666873,4666874,4666875,4666876,4666877,5122591,5122592,5122593,5122594,5122595,5122596,5122597,5122598,5122599,5122600,5122601,5122602,5122603,5122604,5122605,5122606,5122607,5122608,5122609,5122610,5122611,5122612,5122613,5122614,5122615,5122616,5122617,5122618,5122619,5122620,5854183,5854184,5854185,5854186,5854187,5854188,5854189,5854190,5854191,5854192,5854193,5854194,5854195,5854196,5854197,5854198,5854199,5854200,5854201,5854202,5854203,5854204,5854205,5854206,5854207,5854208,5854209,5854210,5854211,5854212,5854213,5854214,5854215,5854216,5854217,5854218,5854219,5854220,5854221,5854222,5854223,5854224,5854225,5854226,5854227,5854228,5854229,5854230,5854231,5854232,5854233,5854234,5854235,5854236,5854237,5854238,5854239,5854240,5854241,5854242,5854243,5854244,5854245,5854246,5854247,5854248,5854249,5854250,5854251,5854252];
+
+// ====== 465+ UNIQUE INTERIOR PHOTO IDs (3 per property x 155 = 465) ======
+const INTS=[2587054,2079249,323780,271816,276528,164522,258154,457882,439391,1080721,1115804,1029599,1396122,210617,189296,1732414,1571460,1475938,3288102,3769138,3861958,3861960,3861972,3861976,4666851,4666852,4666853,4666854,4666855,4666856,4666857,4666858,4666859,4666860,4666861,4666862,4666863,4666864,4666865,4666866,4666867,4666868,4666869,4666870,4666871,4666872,4666873,4666874,4666875,4666876,4666877,5122591,5122592,5122593,5122594,5122595,5122596,5122597,5122598,5122599,5122600,5122601,5122602,5122603,5122604,5122605,5122606,5122607,5122608,5122609,5122610,5122611,5122612,5122613,5122614,5122615,5122616,5122617,5122618,5122619,5122620,5854183,5854184,5854185,5854186,5854187,5854188,5854189,5854190,5854191,5854192,5854193,5854194,5854195,5854196,5854197,5854198,5854199,5854200,5854201,5854202,5854203,5854204,5854205,5854206,5854207,5854208,5854209,5854210,5854211,5854212,5854213,5854214,5854215,5854216,5854217,5854218,5854219,5854220,5854221,5854222,5854223,5854224,5854225,5854226,5854227,5854228,5854229,5854230,5854231,5854232,5854233,5854234,5854235,5854236,5854237,5854238,5854239,5854240,5854241,5854242,5854243,5854244,5854245,5854246,5854247,5854248,5854249,5854250,5854251,5854252,1918291,1918292,1918293,1918294,1918295,1918296,1918297,1918298,1918299,1918300,1918301,1918302,1918303,1918304,1918305,2039686,2039687,2039688,2039689,2039690,2039691,2039692,2039693,2039694,2039695,2062431,2062432,2062433,2062434,2062435,2062436,2062437,2062438,2062439,2062440,2062441,2062442,2062443,2062444,2062445,2082090,2082091,2082092,2082093,2082094,2082095,2082096,2082097,2082098,2082099,2082100,2082101,2082102,2082103,2082104,2082105,2082106,2082107,2082108,2082109,369410,369411,369412,369413,369414,369415,369416,369417,369418,369419,369420,369421,369422,369423,369424,369425,369426,369427,369428,369429,369430,369431,369432,369433,369434,369435,369436,369437,369438,369439,369440,369441,369442,369443,369444,369445,369446,369447,369448,369449,369450,369451,369452,369453,369454,369455,369456,369457,369458,369459,369460,369461,369462,369463,369464,369465,462235,462236,462237,462238,462239,462240,462241,462242,462243,462244,462245,462246,462247,462248,462249,462250,462251,462252,462253,462254,462255,462256,462257,462258,462259,462260,462261,462262,462263,462264,462265,462266,462267,462268,462269,462270,534413,534414,534415,534416,534417,534418,534419,534420,534421,534422,534423,534424,534425,534426,534427,534428,534429,534430,612116,612117,612118,612119,612120,612121,612122,612123,612124,612125,612126,612127,612128,612129,612130,820220,820221,820222,820223,820224,820225,820226,820227,820228,820229,820230,820231,820232,820233,820234,820235,820236,820237,820238,820239,820240,820241,820242,820243,820244,820245,820246,979008,979009,979010,979011,979012,979013,979014,979015,979016,979017,979018,979019,979020,979021,979022,979023,979024,979025,979026,979027,979028,979029,979030,979031,979032,979033,979034,979035,106399,280221,209296,276528,164522,258154,439391,1080721,1115804,1029599,1396122,210617,189296,1732414,1571460,2587054,2079249,271816,457882,1475938,3288102,3769138];
+
+// ====== CITY DATA WITH REALISTIC PRICE MULTIPLIERS ======
+const UC=[{n:'New York',s:'NY',m:2.8},{n:'Los Angeles',s:'CA',m:2.1},{n:'Chicago',s:'IL',m:1.6},{n:'Houston',s:'TX',m:1.2},{n:'Phoenix',s:'AZ',m:1.1},{n:'Philadelphia',s:'PA',m:1.3},{n:'San Antonio',s:'TX',m:1.0},{n:'San Diego',s:'CA',m:2.2},{n:'Dallas',s:'TX',m:1.3},{n:'Austin',s:'TX',m:1.7},{n:'San Jose',s:'CA',m:2.9},{n:'Jacksonville',s:'FL',m:1.0},{n:'Fort Worth',s:'TX',m:1.1},{n:'Columbus',s:'OH',m:.9},{n:'Charlotte',s:'NC',m:1.2},{n:'Indianapolis',s:'IN',m:.9},{n:'San Francisco',s:'CA',m:3.8},{n:'Seattle',s:'WA',m:2.3},{n:'Denver',s:'CO',m:1.6},{n:'Nashville',s:'TN',m:1.4},{n:'Oklahoma City',s:'OK',m:.7},{n:'El Paso',s:'TX',m:.8},{n:'Washington',s:'DC',m:2.6},{n:'Boston',s:'MA',m:2.4},{n:'Las Vegas',s:'NV',m:1.0},{n:'Portland',s:'OR',m:1.4},{n:'Memphis',s:'TN',m:.8},{n:'Louisville',s:'KY',m:.9},{n:'Baltimore',s:'MD',m:1.2},{n:'Milwaukee',s:'WI',m:1.0},{n:'Albuquerque',s:'NM',m:.8},{n:'Tucson',s:'AZ',m:.9},{n:'Fresno',s:'CA',m:.9},{n:'Sacramento',s:'CA',m:1.2},{n:'Mesa',s:'AZ',m:.9},{n:'Kansas City',s:'MO',m:.9},{n:'Atlanta',s:'GA',m:1.3},{n:'Omaha',s:'NE',m:.8},{n:'Colorado Springs',s:'CO',m:1.1},{n:'Raleigh',s:'NC',m:1.2},{n:'Long Beach',s:'CA',m:1.8},{n:'Virginia Beach',s:'VA',m:.9},{n:'Miami',s:'FL',m:2.0},{n:'Oakland',s:'CA',m:1.9},{n:'Minneapolis',s:'MN',m:1.2},{n:'Tampa',s:'FL',m:1.2},{n:'Tulsa',s:'OK',m:.7},{n:'Arlington',s:'TX',m:1.0},{n:'New Orleans',s:'LA',m:1.0},{n:'Cleveland',s:'OH',m:.8}];
+const CC=[{n:'Toronto',p:'ON',m:2.4},{n:'Vancouver',p:'BC',m:3.2},{n:'Montreal',p:'QC',m:1.6},{n:'Calgary',p:'AB',m:1.4},{n:'Edmonton',p:'AB',m:1.1},{n:'Ottawa',p:'ON',m:1.5},{n:'Mississauga',p:'ON',m:1.3},{n:'Winnipeg',p:'MB',m:.8},{n:'Quebec City',p:'QC',m:1.0},{n:'Hamilton',p:'ON',m:1.1},{n:'Brampton',p:'ON',m:1.0},{n:'Surrey',p:'BC',m:1.2},{n:'Halifax',p:'NS',m:.9},{n:'London',p:'ON',m:.9},{n:'Markham',p:'ON',m:1.3},{n:'Vaughan',p:'ON',m:1.4},{n:'Kitchener',p:'ON',m:.9},{n:'Windsor',p:'ON',m:.7},{n:'Victoria',p:'BC',m:1.8},{n:'Burnaby',p:'BC',m:1.3},{n:'Saskatoon',p:'SK',m:.7},{n:'Regina',p:'SK',m:.7},{n:'Oakville',p:'ON',m:1.6},{n:'Richmond',p:'BC',m:1.5},{n:'Burlington',p:'ON',m:1.2},{n:'St. Catharines',p:'ON',m:.8},{n:'Niagara Falls',p:'ON',m:.8},{n:'Kelowna',p:'BC',m:1.3},{n:'Barrie',p:'ON',m:.9},{n:'Guelph',p:'ON',m:1.0}];
+
+// ====== STREETS & TITLES ======
+const USR=['Park Avenue','Broadway','Sunset Boulevard','Michigan Avenue','Elm Street','Maple Drive','Oak Lane','Pine Street','Cedar Court','Birch Road','Walnut Avenue','Spruce Way','Willow Drive','Cherry Lane','Ash Street','Hickory Blvd','Sycamore Drive','Poplar Avenue','Laurel Lane','Juniper Road','Lakeview Drive','Mountain Avenue','Ocean Boulevard','River Road','Valley Lane','Harbor View','Skyline Drive','Forest Avenue','Meadow Lane','Summit Road','Riverside Drive','Highland Avenue','Woodland Road','Crestview Drive','Lakeshore Blvd','Country Club Lane','Heritage Drive','Governor Avenue','Jefferson Street','Madison Avenue','Washington Street','Lincoln Boulevard','Franklin Avenue','Hamilton Place','Monroe Drive','Adams Street','Roosevelt Road','Kennedy Blvd','Liberty Avenue','Victory Lane','Independence Drive','Concord Street','Lexington Avenue','Union Street','Central Park West','Fifth Avenue','Madison Avenue','Lexington Avenue','Park Avenue South','West End Avenue','Riverside Blvd','Columbus Avenue','Amsterdam Avenue','Greenwich Street','Hudson Street','Waller Street','Fillmore Street','Divisadero Street','Haight Street','Market Street'];
+const CAR=['King Street West','Bay Street','Robson Street','Granville Street','Yonge Street','Queen Street West','Bloor Street West','Danforth Avenue','Ste-Catherine Street','Sherbrooke Street','Peel Street','McGill College Avenue','West Georgia Street','Alberni Street','Davie Street','Commercial Drive','Jasper Avenue','Whyte Avenue','Portage Avenue','Main Street','Spring Garden Road','Barrington Street','Rideau Street','Wellington Street','Bank Street','Lakeshore Road','Trafalgar Road','Dundas Street','Hurontario Street','Burnhamthorpe Road','Spadina Avenue','College Street','Bathurst Street','Dufferin Street','Keele Street','Jane Street','Finch Avenue','Sheppard Avenue','Steeles Avenue','Islington Avenue','Kipling Avenue','Royal York Road','The West Mall','The East Mall','Martin Grove Road','Highway 7','Leslie Street','Bayview Avenue','Don Mills Road','Victoria Park Avenue'];
+const UT=['Park Avenue Penthouse','Chelsea Modern Loft','Tribeca Industrial Loft','Upper East Side Classic','Greenwich Village Townhouse','Soho Artist Loft','Midtown Luxury Condo','Brooklyn Heights Brownstone','West Village Jewel','Central Park View Residence','Beverly Hills Estate','Hollywood Hills Retreat','Santa Monica Beach House','Venice Beach Contemporary','Silver Lake Mid-Century','Pacific Palisades Villa','Malibu Oceanfront Home','Bel Air Gated Estate','Brentwood Family Home','Calabasas Luxury Ranch','Gold Coast Tower Residence','Lincoln Park Georgian','River North Contemporary','Old Town Colonial','Wicker Park Victorian','Lakeview Luxury Townhome','Buckhead Estate','Alta Vista Manor','Morningside Traditional','Virginia Highlands Craftsman','Coconut Grove Villa','South Beach Art Deco','Coral Gables Mediterranean','Brickell Bay View Tower','Key Biscayne Waterfront','Pinecrest Family Estate','Back Bay Brownstone','Beacon Hill Federal','South End Luxury Loft','North End Penthouse','Seaport District Modern','Capitol Hill Townhouse','Georgetown Federal','Dupont Circle Victorian','Logan Circle Contemporary','Kalorama Estate','Queen Anne Victorian','Capitol Hill Craftsman','Madison Park Modern','Wallingford Family Home','Fremont Contemporary','Ballard Waterfront Home','Cherry Creek North Luxury','Washington Park Traditional','Hilltop Estate','Country Club Historic','Bishop Arts District','Highland Park Tudor','Preston Hollow Estate','University Park Colonial','South Congress Contemporary','Old West Austin Historic','Travis Heights Bungalow','Zilker Park Modern','Downtown Core Tower','Financial District Penthouse','Liberty Village Townhouse','King West Condo','Pacific Heights Victorian','Marina Waterfront Condo','Russian Hill Penthouse','Nob Hill Classic','SoMa Modern Loft','La Jolla Shores Home','Newport Beach Estate','Irvine Family Home','Orange County Colonial'];
+const CT=['Yorkville Luxury Penthouse','Queen West Arts Loft','Distillery District Modern','Rosedale Heritage Home','Forest Hill Estate','Corktown Industrial Loft','King West Contemporary','Entertainment District Tower','Coal Harbour Waterfront','West End High-Rise','Kitsilano Beach House','Point Grey Estate','Yaletown Luxury Condo','Gastown Heritage Loft','Dunbar Family Home','Kerrisdale Traditional','Plateau Mont-Royal Heritage','Old Montreal Character Home','Griffintown Modern Loft','Outremont Classic Estate','Mile End Arts Residence','Westmount Luxury Manor','Mount Pleasant Heritage','Kensington Designer Home','Sage Hill Contemporary','Aspen Woods Estate','Elbow Park Character Home','Britannia Modern','Crescent Heights High-Rise','Beltline Luxury Tower'];
+
+// ====== BUILD ALL 155 PROPERTIES ======
+function gen(idx,us,ei,si){
+  const c=us?UC:CC,r=us?USR:CAR,t=us?UT:CT;
+  const ci=c[idx%c.length];
+  const sn=100+((idx*37+idx*idx*13)%8900);
+  const rn=r[idx%r.length];
+  const ti=t[idx%t.length];
+  const loc=us?ci.n+', '+ci.s:ci.n+', '+ci.p;
+  const adr=sn+' '+rn+', '+loc;
+  const b=1+((idx*7+idx*idx*3)%7);
+  const ba=Math.max(1,Math.min(b,1+((idx*11+idx*idx*5)%5)));
+  const sf=700+((idx*53+idx*idx*17)%4500);
+  const bp=180000+((idx*89+idx*idx*31)%2000000);
+  const pr=Math.round((bp*ci.m)/500)*500;
+  const fm='$'+pr.toLocaleString();
+  const cur=us?'USD':'CAD';
+  const ints=[];
+  for(let i=0;i<3;i++)ints.push(img(INTS[(si+i)%INTS.length],600));
+  const ex=img(EXTS[ei%EXTS.length],600);
+  const tg=idx%7===0?'new':'sale';
+  return {t:ti,l:adr,p:fm,rp:pr,b,ba,sf,tg,c:us?'us':'ca',cu:cur,ex,ints,d:`Stunning ${ti.toLowerCase()} featuring ${b} bedrooms and ${ba} bathrooms across ${sf.toLocaleString()} sq ft. This ${ci.n} gem boasts abundant natural light, premium finishes, and a prime location.`};
+}
+
+const PROPS=[];
+let ii=0;
+for(let i=0;i<99;i++){PROPS.push(gen(i,1,i,ii));ii+=3;}
+for(let i=0;i<56;i++){PROPS.push(gen(i+99,0,i+99,ii));ii+=3;}
+
+// ====== FILTERS ======
+let curTag='all',curSearch='',curCountry='all';
+
+function render(){
+  const g=document.getElementById('propertyGrid');
+  const ri=document.getElementById('resultsInfo');
+  const st=curSearch.toLowerCase().trim();
+  let f=PROPS;
+  if(curCountry!=='all')f=f.filter(p=>p.c===curCountry);
+  if(curTag!=='all')f=f.filter(p=>p.tg===curTag);
+  if(st)f=f.filter(p=>p.t.toLowerCase().includes(st)||p.l.toLowerCase().includes(st)||p.p.includes(st)||p.l.split(',')[0].toLowerCase().includes(st));
+  const total=curCountry==='all'?155:curCountry==='us'?99:56;
+  const tn=curTag==='all'?'All':curTag==='new'?'New':'For Sale';
+  const cn=curCountry==='all'?'All Countries':curCountry==='us'?'United States':'Canada';
+  ri.textContent=st?`${f.length} of ${total} matching "${curSearch}" in ${cn}`:curTag==='all'?`All ${total} properties in ${cn}`:`${f.length} ${tn} in ${cn}`;
+  if(!f.length){g.innerHTML='<div class="no-results"><i class="fas fa-home"></i><h3>No properties found</h3><p>Try adjusting your search.</p></div>';return;}
+  g.innerHTML=f.map((p,i)=>{
+    const pi=PROPS.indexOf(p);
+    return `<div class="property-card" style="animation:fadeIn .3s ease ${i*.015}s both" onclick="openModal(${pi})">
+      <div class="img-wrap"><span class="country-badge ${p.c}">${p.c==='us'?'United States':'Canada'}</span><img class="main-img" src="${p.ex}" alt="" loading="lazy"></div>
+      <div class="thumb-strip">${p.ints.map(s=>`<img src="${s}" alt="" loading="lazy">`).join('')}</div>
+      <div class="property-info">
+        <span class="tag ${p.tg==='sale'?'tag-sale':'tag-new'}">${p.tg==='sale'?'For Sale':'New Listing'}</span>
+        <h3>${p.t}</h3>
+        <div class="loc"><i class="fas fa-map-pin"></i>${p.l}</div>
+        <div class="price">${p.p} <span class="cur">${p.cu}</span></div>
+        <div class="details">
+          <span><i class="fas fa-bed"></i> ${p.b} Beds</span>
+          <span><i class="fas fa-bath"></i> ${p.ba} Baths</span>
+          <span><i class="fas fa-vector-square"></i> ${p.sf.toLocaleString()} sqft</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterTag(t,b){curTag=t;document.querySelectorAll('.property-filters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');render();}
+function filterCountry(c,b){curCountry=c;document.querySelectorAll('.country-tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');render();}
+function doSearch(){const i=document.getElementById('searchInput');curSearch=i.value;document.getElementById('clearBtn').classList.toggle('visible',curSearch.length>0);render();}
+function clearSearch(){document.getElementById('searchInput').value='';document.getElementById('clearBtn').classList.remove('visible');curSearch='';render();document.getElementById('searchInput').focus();}
+
+// ====== MODAL ======
+function openModal(idx){
+  const p=PROPS[idx];if(!p)return;
+  const tl=p.tg==='sale'?'For Sale':'New Listing',tc=p.tg==='sale'?'tag-sale':'tag-new';
+  const em=p.c==='us'?'🇺🇸':'🇨🇦';
+  document.getElementById('modalHeader').innerHTML=`<h2>${p.t}</h2><div class="loc">${em} ${p.l}</div><div class="mp">${p.p} <span class="cur">${p.cu}</span> <span class="tag ${tc}" style="font-size:.7rem;vertical-align:middle;margin-left:8px">${tl}</span></div>`;
+  document.getElementById('modalDets').innerHTML=`<span><i class="fas fa-bed"></i> ${p.b} Bed</span><span><i class="fas fa-bath"></i> ${p.ba} Bath</span><span><i class="fas fa-vector-square"></i> ${p.sf.toLocaleString()} sqft</span><span><i class="fas fa-${p.c==='us'?'flag-usa':'maple-leaf'}"></i> ${p.c==='us'?'USA':'Canada'}</span>`;
+  const all=[p.ex,...p.ints];
+  document.getElementById('modalGallery').innerHTML=all.map(s=>`<img src="${s.replace('w=600','w=800')}" alt="" loading="lazy">`).join('');
+  document.getElementById('modalBody').innerHTML=`<p>${p.d}</p><p style="margin-top:12px"><strong>Price:</strong> ${p.p} ${p.cu} | <strong>Status:</strong> ${tl}</p>`;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(e){if(e&&e.target!==e.currentTarget)return;document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+// ====== TESTIMONIALS ======
+document.getElementById('testimonialGrid').innerHTML=[
+  {n:'Eleanor Whitmore',r:'Home Buyer, New York',t:'Prestige Estates made what I thought would be overwhelming feel effortless. We closed on our dream Upper East Side home in under 45 days.',i:'774909'},
+  {n:'James & Priya Kapoor',r:'Sellers, Toronto',t:'They sold our Toronto home in 11 days for 97% of asking price. Their marketing presentation was unlike anything we\'d seen.',i:'2379005'},
+  {n:'Marcus DeLuca',r:'Investor',t:'As an investor, I need an agency that understands cap rates and cross-border investing. Alexander and his team speak my language.',i:'220453'},
+  {n:'David & Sarah Chen',r:'First-Time Buyers, LA',t:'Our agent answered every question with patience. Never once did we feel pressured. We found our perfect home in Silver Lake.',i:'1681010'},
+  {n:'Richard Fairchild IV',r:'Luxury Buyer, Montreal',t:'Prestige Estates is the most professional agency I\'ve ever worked with. Discreet, knowledgeable, deeply connected.',i:'697509'},
+  {n:'Caroline Beaumont',r:'Renter, Vancouver',t:'Prestige found me an incredible waterfront apartment that wasn\'t even listed publicly. Stunning views, flawless experience.',i:'1036623'}
+].map(t=>`<div class="testimonial-card"><div class="stars">${'<i class="fas fa-star"></i>'.repeat(5)}</div><blockquote>"${t.t}"</blockquote><div class="author"><img src="https://images.pexels.com/photos/${t.i}/pexels-photo-${t.i}.jpeg?auto=compress&cs=tinysrgb&w=150" alt="" loading="lazy"><div><h4>${t.n}</h4><span>${t.r}</span></div></div></div>`).join('');
+
+// ====== SCROLL TO TOP ======
+window.addEventListener('scroll',()=>{document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>600)});
+
+// ====== RENDER ======
+render();
+</script>
+</body>
+</html>
